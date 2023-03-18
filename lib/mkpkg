@@ -1,0 +1,13 @@
+#-------------------------------------------------------------------------------
+# Update the library for the IUETOOLS package.			16-Jul-99
+
+$checkout iuetools.a iuetools$
+$update	  iuetools.a
+$checkin  iuetools.a iuetools$
+$exit
+
+iuetools.a:
+	get_colptr.x	<tbset.h> "../mx.h"
+	get_disp.x	<tbset.h> "../mx.h"
+	;
+

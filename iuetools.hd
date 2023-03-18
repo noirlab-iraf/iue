@@ -1,0 +1,14 @@
+# Help directory for the IUETOOLS package.
+
+$iuetools	= "home$source/iuetools/"
+$doc		= "home$source/iuetools/doc/"
+
+infoiue 	hlp = doc$infoiue.hlp,
+		src = iuetools$infoiue/t_infoiue.x
+
+mxexpand 	hlp = doc$mxexpand.hlp,
+		src = iuetools$mxexpand/mxexpand.x
+
+mxtomultispec	hlp = doc$mxtomultispec.hlp
+		src = iuetools$mxtomulti/mxtomulti.x
+

@@ -1,0 +1,96 @@
+.help mxtomultispec Jul99 iue.iuetools
+.ih 
+NAME
+mxtomultispec - Copy spectra from FITS 3-D tables to a multispec image
+.ih 
+USAGE 
+mxtomultispec input output
+.ih
+DESCRIPTION
+This task will extract spectra stored in the specified rows of a 
+list of FITS 3-D binary tables and convert to IRAF "multispec" 
+format images. This task is intended primarily as a means to convert 
+spectra from the IUE spectral format created by the "mxexpand" task 
+to a format that can be used as input to NOAO spectral tasks, such 
+as 'splot'. 
+
+The task extracts the flux and wavelength arrays from specified rows, 
+each of which contains a spectral order, from the input FITS table. 
+To see the names of these columns in the input table, use the "tlcol" 
+task. The dispersion solutions are written to the header of the output 
+file, and the flux arrays are written to successive lines in the 
+output "multispec" image. Type "help specwcs" for details of the 
+"multispec" spectral format. 
+
+The rows of interest may be designated by an appropriate row 
+selector appended to the input table name. Type "help selectors" 
+for details of the row selector syntax for tables. If no row 
+selector is used, all the rows will be written to the output image. 
+For high dispersion spectra, the "beam" number of the output 
+"multispec" image will be populated with the spectrum order number. 
+For low dispersion spectra, the aperture designation is appended to 
+the spectrum title. 
+.ih
+PARAMETERS
+.ls input [file name]
+A file name template of FITS files containing IUE extracted spectra 
+in a BINTABLE extension. The template may contain wildcards and 
+other special characters: see the help documents for "files" and 
+"sections" for details of the syntax. A specific range of rows may 
+be specified using the "selectors" syntax for table rows. All rows 
+are extracted by default. 
+.le
+.ls output [file name]
+An image name template for the output Multispec 2-D images. 
+.le
+.ih
+EXAMPLES
+1. Extract all rows from the input FITS table swp12345mxlo.fits, 
+and write the output to the file swp12345mx_ms.fits.
+
+.nf
+   cl> mxtomultispec swp12345mxlo.fits swp12345mx_ms.fits
+.fi
+
+2. Extract rows 2, 3, 4, and 12 from all the low-dispersion SWP 
+FITS tables swp*mxlo.fits, and generate multispec output files with 
+the string "_ms" appended to the root name. NOTE THE USE OF THE 
+DOUBLE QUOTES around the file name+row selector; this is necessary 
+for the CL to parse the command correctly. 
+
+.nf
+   cl> mxtomultispec "swp*mxlo.fits[r:row=(2:4,12)]" *%%_ms%.fits
+.fi
+
+3. Extract spectral orders 82-90 from the file 
+lwp12354mxhi.fits and write the output to the OIF file 
+lwp12354mx_ms.imh. Then use "splot" to examine order 83. 
+
+.nf
+   cl> mxtomultispec "lwp12354mxhi.fits[r:order=(82:90)]" \
+   >>> lwp12354mx_ms.imh
+   cl> splot lwp12354mx_ms.imh 2
+.fi
+
+4. Extract the net flux and wavelength columns from row 
+2 of the FITS table swp12354mx.fits and write the output 
+to the OIF file swp12354mx_ms.imh.
+
+.nf
+   cl> mxtomultispec "swp12354mx.fits[r:row=2]" \
+   >>> flux_col=net swp12354mx_ms.imh
+.fi
+.ih
+BUGS
+.ih
+REFERENCES
+This task was written as part of a port of the NEWSIPS processing 
+pipeline and ancillary utilities to the IRAF environment. Support 
+for this software development was provided from the NASA 
+Astrophysics Data Program through grant NAS5-32697 to the Space 
+Telescope Science Institute. 
+.le
+.ih
+SEE ALSO
+files, mxexpand, sections, selectors, specwcs, splot, tlcol
+.endhelp

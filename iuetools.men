@@ -1,0 +1,9 @@
+Menu for the package `iuetools':
+	IUE/NEWSIPS Utilities Package
+
+      infoiue - Print exposure information in a list of IUE headers
+     mxexpand - Expand the wavelength array in NEWSIPS MXLO/HI files
+mxtomultispec - Copy spectra from FITS BINTABLES to multispec format
+
+(Type "help iuetools option=sysdoc" for detailed information about the 
+`iuetools' package.)

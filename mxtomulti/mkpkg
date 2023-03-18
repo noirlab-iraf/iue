@@ -1,0 +1,13 @@
+#-------------------------------------------------------------------------------
+# Update the "mxexpand" task in the IUETOOLS package.		16-Jul-99
+
+$checkout iuetools.a iuetools$
+$update	  iuetools.a
+$checkin  iuetools.a iuetools$
+$exit
+
+iuetools.a:
+	mxtomulti.x	<tbset.h> <imhdr.h> <error.h> "../mx.h" 
+	mk_mswcs.x	<tbset.h> <imhdr.h> "../mx.h" 
+	;
+

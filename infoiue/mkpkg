@@ -1,0 +1,13 @@
+#-------------------------------------------------------------------------------
+# Update the "infoiue" task in the IUETOOLS package.		15-May-98
+
+$checkout iuetools.a iuetools$
+$update	  iuetools.a
+$checkin  iuetools.a iuetools$
+$exit
+
+iuetools.a:
+	kw_struct.x	"iinfo.h" 
+	t_infoiue.x	<error.h> <imhdr.h> "iinfo.h" 
+	;
+

@@ -1,0 +1,56 @@
+.help itf_trans May98 IUE.IUETOOLS
+.ih
+NAME
+  itf_trans - Transpose the ITF image axes from X,Y,Z to Z,X,Y
+.ih
+USAGE
+itf_trans input output
+.ih
+DESCRIPTION
+This task will transpose the axes of an Intensity Transfer Function 
+(ITF) reference image from X,Y,Z to Z,X,Y for use in the NEWSIPS 
+calibration pipeline. The transposed ITF is needed for more 
+efficient processing in the PHOTOM module (by a factor of >10), 
+while minimizing memory use. 
+
+This task is intended for use as part of the "newsips" pipeline 
+installation and configuration. 
+.ih 
+PARAMETERS
+.ls input [string]
+Name of input ITF reference image. The image is assumed to be 
+3-dimensional, with the individual levels of the ITF residing 
+in separate image planes. 
+.le
+.ls output [string]
+Name of transposed ITF reference image. The image axes will be 
+transposed from X,Y,Z to Z,X,Y. The file naming convention for 
+the "newsips" calibration pipeline is to append an "r" to the 
+ITF file root, though this convention can be altered by 
+changing the "ITFRFILE" calibration keyword in the images to be 
+calibrated.
+.le
+.ih 
+EXAMPLES
+1. Transpose the axes of the SWP ITF reference file. 
+
+.nf
+    cl> cd iue$cal_refer
+    cl> itf_trans swpitf90.fits swpitf90r.fits
+.fi
+.ih
+TIMING CONSIDERATIONS
+This program is I/O limited. It takes a few minutes (clock time) to 
+run on a Sun ULTRASparc with 128 MB of internal memory. 
+.ih
+REFERENCES
+This task was written as part of a port of the NEWSIPS processing 
+pipeline and ancillary utilities to the IRAF environment. Support 
+for this software development was provided from the NASA 
+Astrophysics Data Program through grant NAS5-32697 to the Space 
+Telescope Science Institute. 
+.ih
+SEE ALSO
+ckwxxx
+
+.endhelp

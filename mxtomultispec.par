@@ -1,0 +1,5 @@
+# mxtomultispec parameter file
+
+intable,s,a,"",,,"Input template for 3-D FITS binary tables"
+output,s,a,"",,,"Output template for multispec image names"
+mode,s,h,"al",,,

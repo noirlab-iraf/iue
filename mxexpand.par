@@ -1,0 +1,6 @@
+# mxexpand parameter file
+
+intable,s,a,"",,,"List of input MX files"
+directory,s,h,"",,,"Name of directory for output tables"
+wvarr_col,s,h,"Wave_Array",,,"Name for wavelength array in output table"
+mode,s,h,"al",,,

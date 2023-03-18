@@ -1,0 +1,89 @@
+The following instructions will guide you through making your own personal 
+installation of the `iuetools' package in IRAF.  Note that this package 
+depends upon the latest versions of TABLES and STSDAS.  The dependency on 
+STSDAS will be removed in a later release. 
+
+PART 1:  First Time Set-Up
+--------------------------
+
+1)  Untar the file in a suitable directory.  I will use the directory 
+    "/home/shaw/iraf/source" and the tar file "iuetools.tar" for this example. 
+
+	% cd /home/shaw/iraf/source
+	% tar xvpf iuetools.tar
+
+    Note that there are analogous, but not necessarily identical, commands for 
+    this step if you are using a non-Unix operating system.  
+
+2)  Edit the file "iuetools.cl" and change the line:
+
+	string	iuetools	= "home$source/"
+
+    to give the correct path to the directory with the executable, the ".par" 
+    files, etc.  If you place the source code in a subdirectory of your IRAF 
+    home directory (i.e., where your "login.cl" is found) and call it 
+    "source", then the path: "home$source" would be correct, as in the 
+    example above.  
+
+3)  Compile the source code.  For this step, start an IRAF session and "cd" 
+    to the directory where the source code was installed, then run "mkpkg".  
+    Following the previous example, the steps would be:
+
+	cl> cd source
+	cl> mkpkg -p tables
+
+    You will see a warning about the "iuetools.a" file not being found; 
+    this is the normal behavior when the object file is first created. 
+    After some time the compilation will yield a few new files, notably 
+    "xx_iuetools.e" which is the executable.  If there were no errors, you 
+    will be ready to use the "iuetools" package within IRAF after following 
+    the directions in Part 2 below.
+
+
+PART 2:  Using the Package
+--------------------------
+
+Here are the directions for loading and running the `iuetools' package once 
+the package has been installed and rebuilt for your machine.  You will need 
+to perform the first three steps each time you start a new IRAF session, 
+unless you follow the advice in point 4:  
+
+1)  Begin an IRAF session and load TABLES.  (Then "cd" to the directory 
+    where the software is kept.  In fact, it would be best to define an 
+    IRAF environment variable to point to that directory.)  Using the 
+    example directory from 1) above: 
+
+	cl> set iuetools = home$source/
+	cl> cd iuetools$
+
+    And don't forget the trailing slash (/) in the "iuetools" definition!
+
+2)  Define the `iuetools' task, and load the package as:
+
+	cl> task iuetools = iuetools$iuetools.cl
+	cl> iuetools
+
+3)  To use the `mxtomultispec' task you will need to load the "STSDAS", 
+    "hst_calib", and "onedspec" packages. 
+
+4)  Now everything should work during this session.  What I do is to put 
+    the "iuetools$" environment variable and "iuetools" task definitions in 
+    my "loginuser.cl" file so I don't have to define it each time at the 
+    start of an IRAF session.  You may also wish to load the STSDAS, 
+    hst_calib, and onedspec packages in your "login.cl" file. 
+
+5)  Since the "help" files aren't yet in the help database, you must 
+    access them directly.  To get help on the task `mxexpand' for 
+    example, do:
+
+	cl> cd iuetools$doc
+	cl> help mxexpand.hlp fi+
+
+6)  For general information on the utilities in this package, read the 
+    package help documentation. 
+
+	cl> cd iuetools$
+	cl> help iuetools.hlp fi+
+
+
+Questions?  Contact archive@stsci.edu.

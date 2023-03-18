@@ -1,0 +1,11 @@
+#-------------------------------------------------------------------------------
+#  Update the "itf_trans" task in the IUE.IUETOOLS package	15-May-98
+
+$checkout iuetools.a iuetools$
+$update	  iuetools.a
+$checkin  iuetools.a iuetools$
+$exit
+
+iuetools.a:
+	itf_trans.x	<imhdr.h> 
+	;

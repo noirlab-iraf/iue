@@ -1,0 +1,47 @@
+.help infoiue Apr98 iue.iuetools
+.ih
+NAME
+infoiue -- Print exposure information in a list of IUE images
+.ih
+USAGE
+infoiue input
+.ih
+DESCRIPTION
+This task will print a summmary of the exposure information in a 
+list of one or more IUE image headers. The information includes the 
+camera, dispersion, and aperture used; as well as aperture-
+specific information including the target name and coordinates, 
+observing date/time, exposure duration, trail mode, and flags 
+indicating whether the exposure was a composite (i.e., a multiple) 
+or whether it was segmented. 
+
+This task is intended to provide a succinct summary of the most 
+important exposure information in an easily readible format. See 
+"imheader" to print the full image header, and "hselect" to select 
+specific fields from image headers. 
+.ih 
+PARAMETERS
+.ls input [string]
+List of input files to process.  The list may include wildcard 
+characters. 
+.le
+.ih 
+EXAMPLES
+1. Print exposure information for all files begining with "lwp" in 
+the current directory. 
+
+.nf
+    cl> infoiue lwp*
+.fi
+.ih
+REFERENCES
+This task was written as part of a port of the NEWSIPS processing 
+pipeline and ancillary utilities to the IRAF environment. Support 
+for this software development was provided from the NASA 
+Astrophysics Data Program through grant NAS5-32697 to the Space 
+Telescope Science Institute. 
+.ih
+SEE ALSO
+imheader, hselect
+
+.endhelp

@@ -1,0 +1,69 @@
+.help iuetools Apr98 iue
+.ih
+NAME
+iuetools -- General utilities for IUE/NEWSIPS data
+.ih
+INTRODUCTION
+Tasks in this package are intended to facilitate the use of IUE 
+data within the IRAF environment.  A brief summary of the tasks 
+is given in the table below; details are given in the following 
+sections. This package is a part of a larger effort to port the 
+IUE final archive calibration pipeline (NEWSIPS) and related tools 
+to the IRAF environment. 
+
+.nf
+                     Table 1. IUETOOLS Tasks
+--------------------------------------------------------------------
+    Task      | Description
+--------------------------------------------------------------------
+      infoiue | Print header information for a list of IUE images 
+     mxexpand | Expand the wavelength array in NEWSIPS MXLO/HI files 
+mxtomultispec | Copy spectra from FITS BINTABLES to multispec format
+--------------------------------------------------------------------
+.fi
+.ih
+FORMAT TRANSLATION TASKS
+The "mxexpand" and "mxtomultispec" tasks are intended to translate 
+the format of IUE extracted spectra, as processed by the NEWSIPS 
+calibration pipeline, into a compatible format for analysis with 
+tasks in the TABLES, STSDAS and NOAO external packages. Close 
+examination of the input and output from the "mxexpand" task shows 
+that the archived IUE/NEWSIPS format is nearly identical to the 
+latest standard for HST spectra (3-D binary FITS tables), apart 
+from the file name and the need to store a wavelength array rather 
+than just the coefficients for the dispersion relation function. 
+New and many modified tasks in TABLES and STSDAS are built to make 
+use of the data quality and noise arrays that are part of the 
+IUE/NEWSIPS spectra. This task requires that TABLES V2.0 (or later) 
+be installed. 
+
+The "multispec" format required for NOAO.onedspec tasks is quite a 
+bit different. Although the "splot" task is one of the most popular 
+in IRAF for spectral analysis, it is not capable of utilizing the 
+data quality or noise arrays, nor much of the other ancillary 
+information that is stored in the original FITS table. The 
+"mxtomultispec" task can write the flux array to a multispec image, 
+and will store the dispersion relation in the image header. Note 
+that this task depends on TABLES V2.0, STSDAS V2.0, and IRAF V2.11. 
+.ih
+FUTURE DEVELOPMENT
+Additional tasks will be developed for this package during the 
+course of the NEWSIPS port.  
+.ih
+REFERENCES
+These tasks were written as part of a port of the IUE/NEWSIPS 
+processing pipeline and ancillary utilities to the IRAF 
+environment. This effort is being carried out by Richard A. Shaw 
+and Howard A. Bushouse with support from the NASA Astrophysics Data 
+Program through grant NAS5-32697 to the Space Telescope Science 
+Institute. Details of the NEWSIPS port project are available at 
+http://ra.stsci.edu/newsips//.
+.ih
+SEE ALSO
+mxexpand, mxtomultispec
+
+igi and sgraph in the TABLES.tbplot package are useful plotting utilities. 
+
+The STSDAS.fitting package and the onedspec.splot task are useful for 
+quantitative analysis. 
+.endhelp

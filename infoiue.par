@@ -1,0 +1,4 @@
+# IUETOOLS.infoiue parameter file				28-Apr-98
+
+input,s,a,"",,,"List of input images"
+mode,s,h,"al",,,

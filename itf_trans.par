@@ -1,0 +1,5 @@
+# iuetools.itf_trans parameter file
+
+input,s,a,"",,,"ITF to be transposed"
+output,s,a,"",,,"Transposed ITF"
+mode,s,h,"al",,,

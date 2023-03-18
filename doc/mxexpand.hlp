@@ -1,0 +1,72 @@
+.help mxexpand Dec97 iue.iuetools
+.ih
+NAME
+mxexpand -- Expand the wavelength array in NEWSIPS MXLO/HI files
+.ih
+USAGE
+mxexpand input
+.ih
+DESCRIPTION
+This task will copy a list of files containing extracted spectra as 
+they are retrived from the IUE final archive (i.e., MXLO or MXHI 
+format FITS tables), and convert them on output to a form suitable 
+for many STSDAS/TABLES tasks for plotting and analysis. The files 
+may optionally be written to another directory. 
+
+Each file is renamed (if necessary) from the form FILE.mxDD to 
+FILEmxDD.fits, where "FILE" could be the camera name and image 
+sequence number (for example), and "DD" is the dispersion (LO or 
+HI). The extracted spectra are stored in the MX files order one per 
+row; this task will expand the initial wavelength (in the "WAVELENGTH" 
+column) and the delta wavelength ("DELTAW" column) into a 
+wavelength array for each spectrum, and store the result in a new 
+column selected by the user. Note: use the "tlcol" task to see the 
+names of the columns in a table. 
+
+When the dispersion is expanded to an array, tasks such "igi", 
+"sgraph", and various tasks in the "fitting" package can access the 
+spectra directly. To analyze IUE spectra with NOAO onedspec tasks, 
+such as "splot", the output of this task must be translated to 
+"multispec" format. Type "help mxtomultispec" for details. 
+.ih 
+PARAMETERS
+.ls input [string]
+List of input files to process.  The list may include wildcard 
+characters. 
+.le
+.ls (directory = "") [string]
+Name of the directory for output file(s). If the input files 
+already have a valid table extension (such as .fits), they will be 
+modified in-place unless this parameter has a value other than the 
+null string. 
+.le
+.ls (wvarr_col = "Wave_Array") [string]
+Name for the output column containing the wavelength array(s). 
+.le
+.ih 
+EXAMPLES
+1. Convert the files lwp12345.mxlo and lwp12354.mxhi to the 
+standard TABLES format for spectra. 
+
+.nf
+    cl> mxexpand lwp*
+.fi
+
+Now plot the large aperture spectrum from the output file 
+lwp12345mxlo.fits. Note that column names are case-insensitive. 
+
+.nf
+    cl> sgraph "lwp12345mxlo.fits[r:Aperture=LARGE] Wave_array Flux"
+.fi
+.ih
+REFERENCES
+This task was written as part of a port of the NEWSIPS processing 
+pipeline and ancillary utilities to the IRAF environment. Support 
+for this software development was provided from the NASA 
+Astrophysics Data Program through grant NAS5-32697 to the Space 
+Telescope Science Institute. 
+.ih
+SEE ALSO
+mxtomultispec, sgraph, selectors, tlcol
+
+.endhelp

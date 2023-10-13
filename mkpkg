@@ -38,6 +38,76 @@ linkonly:
 	$link	x_iuetools.o iuetools.a $(LIBS) -o xx_iuetools.e
 	;
 
+
+# SUMMARY -- [UNIX] mkpkg summary: output a summary of the spooled mkpkg
+# output, omitting most of the mundane chatter.  Used to scan large spool
+# files for errors.
+
+summary:
+        $ifeq (HOSTID, unix)
+            ! grep -v ':$$' spool | grep -v '^xc' | grep -v '^ar'\
+            | grep -v '^check file'
+        $else
+            $echo "mkpkg summary only available on a UNIX system"
+        $endif
+        ;
+
+
+# IRAF multiple architecture support.
+# ----------------------------------------
+
+arch:                                   # show current float option
+showfloat:
+        $verbose off
+        !$(hlib)/mkfloat.csh
+        ;
+generic:                                # generic installation (no bin)
+        $ifnfile (bin.generic)
+            !mkdir bin.generic
+        $endif
+        $verbose off
+        $set DIRS = "lib src"
+        !$(hlib)/mkfloat.csh generic -d $(DIRS)
+        ;
+
+linux:                                  # install Slackwkare Linux binaries
+        $ifnfile (bin.linux)
+            !mkdir bin.linux
+        $endif
+        $verbose off
+        $set DIRS = "lib src"
+        !$(hlib)/mkfloat.csh linux -d $(DIRS)
+        ;
+linux64:                                # install x86_64 binaries
+        $ifnfile (bin.linux64)
+            !mkdir bin.linux64
+        $endif
+        $verbose off
+        $set DIRS = "lib src"
+        !$(hlib)/mkfloat.csh linux64 -d $(DIRS)
+        ;
+macos64:                                 # install Mac OS X (Apple) binaries
+        $call macosx
+        ;
+macosx:                                 # install Mac OS X (Apple) binaries
+        $ifnfile (bin.macosx)
+            !mkdir bin.macosx
+        $endif
+        $verbose off
+        $set DIRS = "lib src"
+        !$(hlib)/mkfloat.csh macosx -d $(DIRS)
+        !ln -s bin.macosx bin.macos64
+        ;
+macintel:                               # install Mac OS X (Intel) binaries
+        $ifnfile (bin.macintel)
+            !mkdir bin.macintel
+        $endif
+        $verbose off
+        $set DIRS = "lib src"
+        !$(hlib)/mkfloat.csh macintel -d $(DIRS)
+        ;
+
+
 iuetools.a:
 	@infoiue
 	@itf_trans
